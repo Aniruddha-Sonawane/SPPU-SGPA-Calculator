@@ -2,89 +2,106 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>SGPA to Percentage Converter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SGPA to Percentage Calculator</title>
   <style>
     body {
+      margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #00c6ff, #0072ff);
+      background: linear-gradient(to bottom right, #007BFF, #00C6FF);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
+      color: #fff;
     }
-    .container {
-      background: white;
-      padding: 40px 30px;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+    .calculator {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
       text-align: center;
-      width: 350px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     }
-    h2 {
-      color: #0072ff;
-      margin-bottom: 25px;
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
     }
-    input {
+
+    input[type="number"] {
       width: 80%;
       padding: 12px;
-      margin-bottom: 20px;
-      border: 2px solid #0072ff;
-      border-radius: 8px;
-      font-size: 16px;
-      outline: none;
-      transition: 0.3s;
-    }
-    input:focus {
-      border-color: #00c6ff;
-      box-shadow: 0 0 5px #00c6ff;
-    }
-    button {
-      background-color: #0072ff;
-      color: white;
-      padding: 12px 25px;
-      font-size: 16px;
+      margin: 10px 0;
+      border-radius: 10px;
       border: none;
-      border-radius: 8px;
+      font-size: 1em;
+      text-align: center;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
-      transition: 0.3s;
+      background-color: #fff;
+      color: #007BFF;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      margin-top: 10px;
     }
+
     button:hover {
-      background-color: #00c6ff;
+      background-color: #007BFF;
+      color: #fff;
+      transform: scale(1.05);
     }
+
     .result {
       margin-top: 20px;
-      font-size: 18px;
+      font-size: 1.4em;
       font-weight: bold;
-      color: #0072ff;
+      color: #fff;
+    }
+
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 1.5em;
+      }
+
+      input[type="number"] {
+        width: 100%;
+      }
+
+      button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>SGPA → Percentage</h2>
-    <input type="number" id="sgpa" placeholder="Enter SGPA (0-10)" step="0.01" min="0" max="10">
+  <div class="calculator">
+    <h1>SGPA → Percentage</h1>
+    <input type="number" id="sgpa" placeholder="Enter SGPA" step="0.01" min="0" max="10">
     <br>
-    <button onclick="convert()">Convert</button>
+    <button onclick="calculatePercentage()">Calculate</button>
     <div class="result" id="result"></div>
   </div>
 
   <script>
-    function convert() {
-      let sgpa = parseFloat(document.getElementById("sgpa").value);
-      let result = document.getElementById("result");
+    function calculatePercentage() {
+      const sgpa = parseFloat(document.getElementById('sgpa').value);
       if (isNaN(sgpa) || sgpa < 0 || sgpa > 10) {
-        result.textContent = "⚠ Please enter a valid SGPA (0–10)";
+        document.getElementById('result').innerText = "Please enter a valid SGPA (0-10)";
         return;
       }
-      let percentage = (sgpa - 0.75) * 10; // SPPU formula
-      result.textContent = "Percentage: " + percentage.toFixed(2) + "%";
+      // SPPU formula: Percentage = SGPA * 10 - 0.75
+      const percentage = (sgpa * 10 - 0.75).toFixed(2);
+      document.getElementById('result').innerText = `Percentage: ${percentage}%`;
     }
-
-    // Enter key triggers conversion
-    document.getElementById("sgpa").addEventListener("keydown", function(e){
-      if(e.key === "Enter") convert();
-    });
   </script>
 </body>
 </html>
