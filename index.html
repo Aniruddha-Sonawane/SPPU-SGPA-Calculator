@@ -4,61 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SGPA to Percentage</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #007BFF; /* simple solid blue */
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .calculator {
-      padding: 20px;
-      text-align: center;
-    }
-
-    input[type="number"] {
-      padding: 10px;
-      margin: 10px 0;
-      width: 80%;
-      font-size: 1em;
-    }
-
-    button {
-      padding: 10px 20px;
-      font-size: 1em;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-
-    .result {
-      margin-top: 15px;
-      font-size: 1.2em;
-    }
-  </style>
 </head>
-<body>
-  <div class="calculator">
-    <h2>SGPA → Percentage</h2>
-    <input type="number" id="sgpa" placeholder="Enter SGPA" step="0.01" min="0" max="10">
+<body style="margin:0; font-family: Arial, sans-serif; background-color:#007BFF; color:#fff; display:flex; justify-content:center; align-items:center; height:100vh; text-align:center;">
+  <div style="padding:20px; width:90%; max-width:400px;">
+    <h2 style="margin-bottom:20px;">SGPA → Percentage</h2>
+    <input id="sgpa" type="number" placeholder="Enter SGPA" step="0.01" min="0" max="10"
+      style="padding:12px; font-size:16px; width:100%; border:none; border-radius:10px; margin-bottom:15px; box-sizing:border-box;">
     <br>
-    <button onclick="calculatePercentage()">Calculate</button>
-    <div class="result" id="result"></div>
+    <button onclick="calculatePercentage()"
+      style="padding:12px 0; font-size:16px; width:100%; border:none; border-radius:10px; background-color:#fff; color:#007BFF; font-weight:bold; cursor:pointer;">
+      Calculate
+    </button>
+    <div id="result" style="margin-top:20px; font-size:18px; font-weight:bold;"></div>
   </div>
 
   <script>
     function calculatePercentage() {
       const sgpa = parseFloat(document.getElementById('sgpa').value);
-      if (isNaN(sgpa) || sgpa < 0 || sgpa > 10) {
-        document.getElementById('result').innerText = "Enter a valid SGPA (0-10)";
+      if(isNaN(sgpa) || sgpa < 0 || sgpa > 10) {
+        document.getElementById('result').innerText = "Enter valid SGPA (0-10)";
         return;
       }
       const percentage = (sgpa * 10 - 0.75).toFixed(2);
-      document.getElementById('result').innerText = `Percentage: ${percentage}%`;
+      document.getElementById('result').innerText = "Percentage: " + percentage + "%";
     }
   </script>
 </body>
